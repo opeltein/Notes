@@ -1,0 +1,50 @@
+﻿@model List<Notes.Models.Note>
+
+@{
+    ViewData["Title"] = "Lista Notatek";
+}
+
+<h2>Lista Notatek</h2>
+
+@if (Model.Any()) // 👈 Sprawdzamy, czy są notatki
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tytuł</th>
+                <th>Treść</th>
+                <th>Data utworzenia</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var note in Model)
+            {
+                <tr>
+                    <td>@note.Title</td>
+                    <td>@note.Content</td>
+                    <td>@note.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>
+                        <form asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@note.Id" />
+                            <button type="submit" class="btn btn-danger">Usuń</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Brak notatek. Dodaj pierwszą notatkę!</p>
+}
+
+<a asp-action="Create" class="btn btn-primary">Dodaj nową notatkę</a>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Wywołanie kodu JavaScript po załadowaniu strony w przeglądarce
+        const item = localStorage.getItem('yourKey');
+        console.log(item);
+    });
+</script>

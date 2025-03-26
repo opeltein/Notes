@@ -1,0 +1,11 @@
+﻿@model Note
+
+<h2>Dodaj notatkę</h2>
+
+<form method="post" action="@Url.Action("Create", "Notes")">
+    <label for="Content">Treść notatki:</label>
+    <input type="text" id="Content" name="Content" required />
+    <span asp-validation-for="Content"></span>
+    <button type="submit">Dodaj</button>
+</form>
+
